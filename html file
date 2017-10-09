@@ -1,0 +1,20 @@
+&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">&lt;/script>
+&lt;script src="/socket.io/socket.io.js">&lt;/script>
+
+&lt;script src="https://cdn.socket.io/socket.io-1.4.5.js">&lt;/script>
+&lt;script src="http://localhost:8080/server.js">&lt;/script>
+&lt;script src="/server.js">&lt;/script>
+&lt;script>
+    var socket = io.connect();
+
+    socket.on('message', function (data) {
+        $('#conversation').append('
+' + data.message);
+     });
+   $(document).ready(function () {
+        $('#send').click(function () {
+            var msg = $('#text').val();
+            socket.emit('client_data', { 'letter': msg });
+         })
+    });
+&lt;/script>
